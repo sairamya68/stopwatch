@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STOP WATCH</title>
+</head>
+<body>
+    <h1 style="color:rgb(52, 198, 198);text-align: center;position:absolute;top:10%;left:40%;font-size: 300%;">STOP WATCH</h1>
+    <div id="myDiv">
+    <span id="t1">00</span>
+    <span>:</span>
+    <span id="t2">00</span>
+    <span>:</span>
+    <span id="t3">00</span>
+</div>
+    <div id="buttons">
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <button id="reset">Reset</button>
+</div>
+    <script>
+        document.body.style.backgroundColor="black";
+        let getDiv=document.querySelector("#myDiv")
+        getDiv.setAttribute("style","font-size:1000%;color:orange;position:absolute;left:25%;top:30%")
+        let getButtons=document.querySelector("#buttons")
+        getButtons.setAttribute("style","display:flex;flex-direction:row;gap:100px;justify-content:center;align-content:center;width:50%;align-items:center;position:absolute;left:25%;top:65%")
+        let getHours=document.querySelector("#t1");
+        let getMinutes=document.querySelector("#t2");
+        let getSeconds=document.querySelector("#t3");
+        let getStart=document.querySelector("#start")
+        getStart.setAttribute("style","width:11%;font-size:170%;color:white;border:1px solid transparent;background-color:green")
+        let getStop=document.querySelector("#stop")
+        getStop.setAttribute("style","width:11%;font-size:170%;color:white;border:1px solid transparent;background-color:red")
+        let getreset=document.querySelector("#reset")
+        getreset.setAttribute("style","width:15%;font-size:180%;color:white;border:1px solid transparent;background-color:blue")
+        let sec=0
+        let min=0
+        let hrs=0
+        const intervalID = setInterval(function() {
+            if(timer){
+                if(sec>=59)
+                {
+                    sec=0
+                    min++
+                    if(min>=59)
+                    {
+                        min=0
+                        hrs++
+                        if(hrs>23)
+                        {
+                            hrs=0
+                            
+                        }
+                    }
+                }
+                else{
+                    sec++
+                }
+                let hstring=hrs
+                let mstring=min
+                let sstring=sec
+                if(sec<10)
+                sstring="0"+sec
+                if(min<10)
+                mstring="0"+min
+                if(hrs<10)
+                hstring="0"+hrs
+                getSeconds.innerHTML=sstring
+                getMinutes.innerHTML=mstring
+                getHours.innerHTML=hstring
+            }}, 1000);
+        getStart.addEventListener("click",()=>{
+            timer=true
+            intervalID()
+        })
+        getStop.addEventListener("click",()=>{
+            // getMinutes.innerHTML="0"+min
+            // getSeconds.innerHTML="0"+sec
+            // getHours.innerHTML="0"+hrs
+            timer=false
+        })
+        getreset.addEventListener("click",()=>{
+            timer=false
+            sec=0
+            min=0
+            hrs=0
+            getSeconds.innerHTML="00"
+            getMinutes.innerHTML="00"
+            getHours.innerHTML="00"
+        })
+    </script>
+</body>
+</html>
